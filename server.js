@@ -7,7 +7,7 @@ const app = express();
 const db = mongoose.connection;
 
 
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
