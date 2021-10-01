@@ -7,3 +7,12 @@
 body {
     background-color: lightslategray;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+#signUp {
+    margin: 50px 300px; 
+}

@@ -22,6 +22,7 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //Require Controllers
 const userController = require("./controllers/users");
 const sessionsController = require('./controllers/sessions');
+const User = require("./models/user");
 
 
 app.use(express.static('public'));
@@ -48,14 +49,25 @@ app.use(
 
 app.use('/users', userController);
 app.use('/sessions', sessionsController);
-//=================================================================
+//===============================================================
 //                            Routes
-//==================================================================
+//===============================================================
 
 app.get("/", (req, res) => {
-	res.send("Root route");
-  });
+  console.log(req.session.currentUser);
+  if(!req.session.currentUser){
+    res.render('plsLogin.ejs');
+  }
+	else {
+    User.findById(req.session.currentUser._id, (error, currUser) => {
+      res.render('index.ejs', {user: currUser});
+    });
+  }
+});
 
+app.get('/register', (req, res) => {
+  res.render('register.ejs');
+});
 
 
 app.listen(PORT, () => console.log(`Server is listening... on port: ${PORT}`));

@@ -17,7 +17,7 @@ sessionsRouter.delete('/', (req, res) => {
 sessionsRouter.post('/', (req, res) => {
     // Check for an existing user
     User.findOne({
-        email: req.body.email
+        username: req.body.username
     }, (error, foundUser) => {
         // send error message if no user is found
         if (!foundUser) {
@@ -34,6 +34,7 @@ sessionsRouter.post('/', (req, res) => {
                 req.session.currentUser = foundUser;
 
                 // redirect back to our home page
+                console.log(req.session.currentUser);
                 res.redirect('/');
             } else {
                 // if the passwords don't match
