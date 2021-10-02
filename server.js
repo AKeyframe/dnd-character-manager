@@ -22,7 +22,10 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //Require Controllers
 const userController = require("./controllers/users");
 const sessionsController = require('./controllers/sessions');
+
+const characterController = require('./controllers/characters');
 const User = require("./models/user");
+const Character = require('./models/character');
 
 
 app.use(express.static('public'));
@@ -46,20 +49,28 @@ app.use(
         saveUninitialized: false
     }));
 
+app.use( (req, res, next) => {
+  res.locals.currentUser = req.session.currentUser;
+  next();
+});
+
 
 app.use('/users', userController);
 app.use('/sessions', sessionsController);
+app.use('/characters', characterController);
 //===============================================================
 //                            Routes
 //===============================================================
 
 app.get("/", (req, res) => {
   console.log(req.session.currentUser);
+  
   if(!req.session.currentUser){
     res.render('plsLogin.ejs');
   }
 	else {
     User.findById(req.session.currentUser._id, (error, currUser) => {
+      
       res.render('index.ejs', {user: currUser});
     });
   }

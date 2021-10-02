@@ -4,7 +4,7 @@ const express = require('express');
 const userRouter = express.Router();
 const User = require('../models/user.js');
 
-// New (registration page)
+// New (registration page) is in the server.js
 
 
 // Create (registration route)

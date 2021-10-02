@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs'); %>
+<body>
+    <h1>Character Creation</h1>
+    <a href="/"><h3>Home</h3></a>
+
+    <div>
+        <form action="/characters" method="POST">
+            <input type="hidden" name="creator" value="<%= user._id %>">
+            <input type="text" name="name" placeholder="Name"><br>
+            <input type="text" name="race" placeholder="race"><br>
+            <input type="text" name="class" placeholder="class"><br>
+            
+
+            <input type="submit" value="Create Character">
+        </form>
+    </div>
+</body>
+</html>
