@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs'); %>
+<body>
+    <h1>Your Campaigns</h1>
+    <a href="/"><h3>Home</h3></a>
+
+    <% if(camps.length != 0) { %>
+        <% camps.forEach( (c, i) => { %>
+            
+            <% if(c.dm == user._id ) { %>
+
+                <a href='/campaigns/<%= c._id %>'><h3><%= c.name %></h3></a>
+                <form action="/campaigns/<%= c._id%>?_method=DELETE" method="POST">
+                    <input type="submit" value="Delete Campaign">
+                </form>
+
+            <% } else { %>
+    
+                <a href='/campaigns/<%= c._id %>'><h3><%= c.name %></h3></a>
+                <form>
+                    <input type="submit" value="Leave Campaign">
+                </form>
+        
+            <% } %> <!-- Else-->
+        <% }) %> <!-- forEach()-->
+    <% } %> <!-- If camps !=0 -->
+    
+</body>
+</html>

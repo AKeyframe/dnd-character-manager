@@ -22,10 +22,12 @@ db.on('disconnected', () => console.log('mongo disconnected'));
 //Require Controllers
 const userController = require("./controllers/users");
 const sessionsController = require('./controllers/sessions');
-
 const characterController = require('./controllers/characters');
+const campaignController = require('./controllers/campaigns');
+
 const User = require("./models/user");
 const Character = require('./models/character');
+const Campaign = require('./models/campaign');
 
 
 app.use(express.static('public'));
@@ -58,6 +60,7 @@ app.use( (req, res, next) => {
 app.use('/users', userController);
 app.use('/sessions', sessionsController);
 app.use('/characters', characterController);
+app.use('/campaigns', campaignController);
 //===============================================================
 //                            Routes
 //===============================================================

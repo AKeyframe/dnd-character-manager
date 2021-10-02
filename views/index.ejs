@@ -5,21 +5,24 @@
 <body>
     <h1>Index</h1>
     
-    <form action="/sessions?_method=DELETE" method="POST"> 
-        <input type="submit" value="Sign Out">
-    </form>
+    
 
     <h1>Welcome <%= user.username %></h1>
     
     <div>
         <a href="/characters/new">Create A Character</a>
+        <a href="/campaigns/new">Create A Campaign</a>
         <!-- <form action="/characters/new" action="GET"> 
             <input type="submit" value="Create Character">
         </form> -->
     </div>
     <div>
         <h4>Dropdown links</h4>
-        <a href="/characters">Characters Page</a>
+        <a href="/characters">Characters</a>
+        <a href="/campaigns">Campaigns</a>
+        <form action="/sessions?_method=DELETE" method="POST"> 
+            <input type="submit" value="Sign Out">
+        </form>
     </div>
 </body>
 </html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs'); %>
+<body>
+    <h1>Campaign Creation</h1>
+    <a href="/"><h3>Home</h3></a>
+
+    <div>
+        <form action="/campaigns" method="POST">
+            <input type="hidden" name="dm" value="<%= user._id %>">
+            <input type="text" name="name" placeholder="Name"><br>
+            
+
+            <input type="submit" value="Create Campaign">
+        </form>
+    </div>
+</body>
+</html>
