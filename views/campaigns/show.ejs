@@ -4,5 +4,14 @@
 <body>
     <h1><%= camp.name %></h1>
     <a href="/"><h3>Home</h3></a>
+
+    <% if(camp.dm.equals(user._id)) { %> 
+        <form action="/campaigns/sendRequest" method="POST">
+            <input type="text" name="username" placeholder="Username">
+            <input type="hidden" name="id" value="<%= camp._id %>">
+            <input type="submit" value="Invite Player">
+        </form>
+    <% } %>
+        
 </body>
 </html>

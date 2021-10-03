@@ -10,6 +10,10 @@ const userSchema = Schema({
   username: {type: String, unique: true, required: true },
   password: { type: String, required: true },
   avatar: String,
+  requests: [{invType: {type: String}, 
+        by: {type: Schema.Types.ObjectId, ref: 'User'},
+        for: {type: Schema.Types.ObjectId, ref: 'Campaign'}}],
+
   characters: [{type: Schema.Types.ObjectId, ref: 'Character'}],
   campaigns: [{type: Schema.Types.ObjectId, ref: 'Campaign'}]
 });

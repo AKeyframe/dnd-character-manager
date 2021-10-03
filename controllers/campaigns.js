@@ -33,14 +33,14 @@ campaignRouter.delete('/:id', (req, res) => {
                     console.log(`added char: ${camp}`);
                     return camp;
                 }
-            });
+            }); //forEach
             user.save();
             console.log(user);
-        });
+        }); //User
         
         res.redirect("/campaigns");
-    });
-});
+    }); //Campaign
+}); //Router
 
 
 //Update
@@ -56,12 +56,32 @@ campaignRouter.post('/', (req, res) => {
         res.redirect(`/campaigns/${createdCampaign._id}`);
     });
 });
+
+campaignRouter.post('/sendRequest', (req, res) => {
+    console.log('=================================================');
+    console.log(req.body);
+    User.findOne({username: req.body.username}, (error, foundUser) => {
+        
+        console.log(foundUser);
+
+        let tempRequest = {};
+        tempRequest.invType = 'campaign';
+        tempRequest.by = req.session.currentUser._id;
+        tempRequest.for = req.body.id;
+        console.log(tempRequest);
+        foundUser.requests.push(tempRequest);
+        foundUser.save();
+        console.log(foundUser);
+
+        res.redirect(`/campaigns/${req.body.id}`);
+    });
+});
 //Edit
 
 //Show
 campaignRouter.get('/:id', (req, res) => {
     Campaign.findById(req.params.id, (error, foundCamp) => {
-        res.render('campaigns/show.ejs', {camp: foundCamp});
+        res.render('campaigns/show.ejs', {camp: foundCamp, user: req.session.currentUser});
     });
 });
 

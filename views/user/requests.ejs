@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head.ejs'); %>
+<body>
+    <h1>Requests</h1>
+
+
+    <% user.requests.forEach( reQ => { %>
+
+        <h4>This request was made by: <%= reQ.by.username %></h4>
+
+
+
+    <% }) %>
+</body>
+</html>

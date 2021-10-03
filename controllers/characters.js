@@ -22,19 +22,19 @@ characterRouter.get('/new', (req, res) => {
 characterRouter.delete('/:id', (req, res) => {
     Character.findByIdAndDelete(req.params.id, (error, delChar) => {
         User.findById(req.session.currentUser._id, (error, user) => {
-            
+
             user.characters = user.characters.filter( (char, i) => {
                 if(!char.equals(delChar._id)){
                     console.log(`added char: ${char}`);
                     return char;
                 }
-            });
+            }); //forEach
             user.save();
             console.log(user);
-        });
+        }); //User
         res.redirect('/characters');
-    });    
-});
+    }); //Character
+}); //Router
 
 
 //Update

@@ -26,6 +26,13 @@ userRouter.post('/', (req, res) => {
     });
 });
 
+userRouter.get("/:username/requests", (req, res) => {
+    sesUser = req.session.currentUser;
+    User.findById(sesUser._id).populate('requests.invType').populate('requests.by').exec( (error, user) => {
+        res.render(`user/requests.ejs`, {user: user});
+    });
+});
+
 // Edit
 
 // Show
