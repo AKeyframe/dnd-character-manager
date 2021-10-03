@@ -21,6 +21,18 @@ characterRouter.get('/new', (req, res) => {
 //Delete
 characterRouter.delete('/:id', (req, res) => {
     Character.findByIdAndDelete(req.params.id, (error, delChar) => {
+        User.findById(req.session.currentUser._id, (error, user) => {
+            let idx;
+            user.characters.forEach( (char, i) => {
+                console.log(char);
+                console.log(delChar._id);
+                if(char === delChar._id){
+                    idx = i;
+                }
+            });
+            user.characters.splice(idx, 1);
+            user.save();
+        });
         res.redirect('/characters');
     });    
 });
@@ -32,8 +44,15 @@ characterRouter.delete('/:id', (req, res) => {
 characterRouter.post('/', (req, res) => {
     Character.create(req.body, (error, createdChar) => {
         console.log(req.body);
-        
+        User.findById(req.session.currentUser._id, (error, user) => {
+            user.characters.push(createdChar._id);
+            user.save();
+        })
         res.redirect(`characters/${createdChar._id}`);
+
+
+        // User.updateOne({_id: createdChar.creator},
+        //     {$push: {characters: createdChar._id}});
     });
 });
 

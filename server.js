@@ -57,7 +57,7 @@ app.use( (req, res, next) => {
 });
 
 
-app.use('/users', userController);
+app.use('/user', userController);
 app.use('/sessions', sessionsController);
 app.use('/characters', characterController);
 app.use('/campaigns', campaignController);

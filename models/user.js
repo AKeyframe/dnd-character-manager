@@ -9,7 +9,9 @@ const userSchema = Schema({
   email: { type: String, unique: true, required: true },
   username: {type: String, unique: true, required: true },
   password: { type: String, required: true },
-  characters: [{type: Schema.Types.ObjectId, ref: 'Character'}]
+  avatar: String,
+  characters: [{type: Schema.Types.ObjectId, ref: 'Character'}],
+  campaigns: [{type: Schema.Types.ObjectId, ref: 'Campaign'}]
 });
 
 // User Model
