@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const campaignSchema = new Schema({
     dm: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     players: [{playerId: {type: Schema.Types.ObjectId, ref: 'User'}, character: {type: Schema.Types.ObjectId, ref: 'Character'}}],
-    pcs: [{type: Schema.Types.ObjectId, ref: 'Character'}],
     name: String,
 });
 

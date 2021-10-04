@@ -23,7 +23,7 @@ characterRouter.get('/new', (req, res) => {
 characterRouter.delete('/:id', (req, res) => {
     Character.findByIdAndDelete(req.params.id, (error, delChar) => {
         User.findById(req.session.currentUser._id, (error, user) => {
-
+            //Remove the character from User
             user.characters = user.characters.filter( (char, i) => {
                 if(!char.equals(delChar._id)){
                     console.log(`added char: ${char}`);
@@ -33,6 +33,22 @@ characterRouter.delete('/:id', (req, res) => {
             user.save();
             console.log(user);
         }); //User
+
+        //Find the campaigns that have the Del Character
+        Campaign.find({players: {$elemMatch: {character: delChar._id}}}, (err, foundCamps) => {
+            //For every campagin with the deleted character
+            foundCamps.forEach((camp, i) => {
+                //Go through each player and remove the deleted character
+                camp.players.forEach( (player, i) => {
+                    if(player.character.equals(delChar._id)) {
+                        player.character = null;
+                         
+                    }
+                })//forEach(player)
+                camp.save();
+            });//forEach(camp)
+
+        });//Campaign
         res.redirect('/characters');
     }); //Character
 }); //Router
@@ -56,10 +72,11 @@ characterRouter.post('/', (req, res) => {
     });
 });
 
+//Adding a created character to a campaign
 characterRouter.post('/joinCampaign', (req, res) => {
     Character.findById(req.body.charId, (error, foundChar) => {
         Campaign.findById(req.body.campId, (campError, foundCamp) => {
-            
+
             //add the campaign to the character
             foundChar.campaign.push(foundCamp._id);
             foundChar.save();
@@ -82,10 +99,12 @@ characterRouter.post('/joinCampaign', (req, res) => {
                         p.character = foundChar._id;
                     }
                 });
+
                 //If it doesn't exist add the player id and the character
                 if(exists===false) {
                     foundCamp.players.push({playerId: foundCamp.dm, character: foundChar._id});
                 }
+
             } else {
                 //Update the players object for the given user/char
                 foundCamp.players.forEach( (p, i) => {
