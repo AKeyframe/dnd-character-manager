@@ -3,10 +3,7 @@
 <%- include('partials/head.ejs'); %>
 
 <body>
-    <h1>Index</h1>
-    
-    
-
+    <%- include('partials/nav.ejs'); %>
     <h1>Welcome <%= user.username %></h1>
     
     <div>
@@ -16,15 +13,13 @@
             <input type="submit" value="Create Character">
         </form> -->
     </div>
-    <div>
-        <h4>Dropdown links</h4>
-        <a href='/user/<%= user.username %>'>Profile</a>
-        <a href="/characters">Characters</a>
-        <a href="/campaigns">Campaigns</a>
-        <a href="/user/<%= user.username %>/requests">Requests</a>
-        <form action="/sessions?_method=DELETE" method="POST"> 
-            <input type="submit" value="Sign Out">
-        </form>
+
+    <div id="defaultChar">
+
+    </div>
+
+    <div id="defaultCamp">
+        
     </div>
 </body>
 </html>

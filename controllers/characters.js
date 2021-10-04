@@ -8,7 +8,7 @@ const User = require('../models/user');
 characterRouter.get("/", (req, res) => {
     Character.find({creator: req.session.currentUser._id}, 
         (error, foundCharacter) => {
-            res.render('characters/index.ejs', {chars: foundCharacter});
+            res.render('characters/index.ejs', {chars: foundCharacter, user: req.session.currentUser});
         });
 });
 
