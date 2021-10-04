@@ -58,20 +58,14 @@ campaignRouter.post('/', (req, res) => {
 });
 
 campaignRouter.post('/sendRequest', (req, res) => {
-    console.log('=================================================');
-    console.log(req.body);
     User.findOne({username: req.body.username}, (error, foundUser) => {
-        
-        console.log(foundUser);
-
         let tempRequest = {};
         tempRequest.invType = 'campaign';
         tempRequest.by = req.session.currentUser._id;
         tempRequest.for = req.body.id;
-        console.log(tempRequest);
+    
         foundUser.requests.push(tempRequest);
         foundUser.save();
-        console.log(foundUser);
 
         res.redirect(`/campaigns/${req.body.id}`);
     });

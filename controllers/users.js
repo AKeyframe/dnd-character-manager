@@ -26,9 +26,41 @@ userRouter.post('/', (req, res) => {
     });
 });
 
+
+userRouter.post('/acceptRequest', (req, res) => {
+    User.findById(req.body.userId, (error, user) => {
+        if(req.body.invType == 'campaign'){
+            user.campaigns.push(req.body.campId);
+        }
+       
+        user.requests = user.requests.filter( reQ => {
+            if(!reQ._id.equals(req.body.reqId)){
+                console.log(`added request ${reQ._id}`);
+                return reQ._id;
+            }
+        });
+        
+        user.save();
+        res.redirect(`/campaigns/${req.body.campId}`);
+    });
+});
+
+userRouter.post('/declineRequest', (req, res) => {
+    User.findById(req.body.userId, (error, user) => {
+        user.requests = user.requests.filter( reQ => {
+            if(!reQ._id.equals(req.body.reqId)){
+                console.log(`added request ${reQ._id}`);
+                return reQ._id;
+            }
+        });
+        user.save();
+        res.redirect(`/user/${user.username}/requests`);
+    });
+});
+
 userRouter.get("/:username/requests", (req, res) => {
     sesUser = req.session.currentUser;
-    User.findById(sesUser._id).populate('requests.invType').populate('requests.by').exec( (error, user) => {
+    User.findById(sesUser._id).populate('requests.by').populate('requests.for').exec( (error, user) => {
         res.render(`user/requests.ejs`, {user: user});
     });
 });

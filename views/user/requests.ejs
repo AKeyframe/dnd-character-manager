@@ -6,11 +6,26 @@
 
 
     <% user.requests.forEach( reQ => { %>
-
-        <h4>This request was made by: <%= reQ.by.username %></h4>
-
-
-
+        <% if(reQ.invType == 'campaign') { %> 
+            <h4><%= reQ.by.username %> has invited you to join their campaign <%=reQ.for.name %></h4>
+            <div>
+                <form action="/user/acceptRequest" method="POST">
+                    <input type="hidden" name="invType" value="<%=reQ.invType%>">
+                    <input type="hidden" name="campId" value="<%=reQ.for._id%>">
+                    <input type="hidden" name="userId" value="<%=user._id%>">
+                    <input type="hidden" name="reqId" value="<%=reQ._id%>">
+                    <input type="submit" value="Accept">
+                </form>
+                <form action="/user/declineRequest" method="POST">
+                    <input type="hidden" name="userId" value="<%=user._id%>">
+                    <input type="hidden" name="reqId" value="<%=reQ._id%>">
+                    <input type="submit" value="Decline">
+                </form>
+            </div>
+        <% } else { %>
+        
+        
+        <% } %>
     <% }) %>
 </body>
 </html>
