@@ -1,6 +1,7 @@
 const express = require('express');
 const characterRouter = express.Router();
 const Character = require('../models/character');
+const Campaign = require('../models/campaign');
 const User = require('../models/user');
 
 
@@ -55,12 +56,64 @@ characterRouter.post('/', (req, res) => {
     });
 });
 
+characterRouter.post('/joinCampaign', (req, res) => {
+    Character.findById(req.body.charId, (error, foundChar) => {
+        Campaign.findById(req.body.campId, (campError, foundCamp) => {
+
+            console.log('========================================');
+            console.log(foundChar);
+            console.log(foundCamp);
+
+            //add the campaign to the character
+            console.log('-----------------------------------');
+            console.log(foundChar.campaign);
+            foundChar.campaign.push(foundCamp._id);
+            foundChar.save();
+
+            //for each player in the campaign
+            foundCamp.players.forEach( (p, i) => {
+                if(p.playerId == req.session.currentUser) {
+                    p.character = foundChar._id;
+                }
+            }); //forEach()
+
+            // If the DM is adding a character of their own
+            if(foundCamp.dm.equals(req.session.currentUser._id)) {
+                //check to see if the DM already added a character and if so
+                //Replace it with the new one
+                let exists = false;
+                foundCamp.players.forEach((p, i) => {
+                    if(p.playerId.equals(foundCamp.dm)){
+                        exists=true;
+                        p.character = foundChar._id;
+                    }
+                });
+                //If it doesn't exist add the player id and the character
+                if(exists===false) {
+                    foundCamp.players.push({playerId: foundCamp.dm, character: foundChar._id});
+                }
+            } else {
+                //Update the players object for the given user/char
+                foundCamp.players.forEach( (p, i) => {
+                    if(p.playerId.equals(foundChar.creator)){
+                        p.character = foundChar._id;
+                    }
+                });
+            }
+
+            foundCamp.save();
+            res.redirect(`/campaigns/${foundCamp._id}`);
+        });
+    });
+});
+
+
 //Edit
 
 //Show
 characterRouter.get('/:id', (req, res) => {
     Character.findById(req.params.id, (error, foundCharacter) =>{
-        res.render('characters/show.ejs', {char: foundCharacter});
+        res.render('characters/show.ejs', {char: foundCharacter, user: req.session.currentUser});
     });
 });
 

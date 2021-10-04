@@ -78,7 +78,9 @@ campaignRouter.post('/sendRequest', (req, res) => {
 //Show
 campaignRouter.get('/:id', (req, res) => {
     Campaign.findById(req.params.id, (error, foundCamp) => {
-        res.render('campaigns/show.ejs', {camp: foundCamp, user: req.session.currentUser});
+        User.findById(req.session.currentUser._id).populate('characters').exec((err, user) => {
+            res.render('campaigns/show.ejs', {camp: foundCamp, user: user});
+        });
     });
 });
 

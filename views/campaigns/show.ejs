@@ -12,6 +12,19 @@
             <input type="submit" value="Invite Player">
         </form>
     <% } %>
+    
+   
+
+    <form action="/characters/joinCampaign" method="POST">
+        <select name="charId">
+        <% user.characters.forEach( (char, i) => { %> 
+            <option value="<%= char._id %>"><%= char.name %></option>
+
+        <% }); %>
+        </select>
+        <input type="hidden" name="campId" value="<%= camp._id %>">
+        <input type="submit" value="Add to Campaign">
+    </form>
         
 </body>
 </html>

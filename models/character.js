@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const characterSchema = new Schema({
     creator: {type: Schema.Types.ObjectId, ref: "User"},
-    game: {type: Schema.Types.ObjectId, ref: 'Campaign'},
+    campaign: [{type: Schema.Types.ObjectId, ref: 'Campaign'}],
     name: String,
     race: String,
     class: String
