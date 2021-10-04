@@ -8,7 +8,7 @@ const User = require('../models/user');
 //Index
 campaignRouter.get('/', (req, res) => {
     user=req.session.currentUser;
-    Campaign.find({$or: [{dm: user._id }, {pcs: user._id }]},
+    Campaign.find({$or: [{dm: user._id }, {players: {$elemMatch: {playerId: user._id}}}]},
         (error, foundCamp) => {
             console.log(foundCamp);
             console.log(user._id);

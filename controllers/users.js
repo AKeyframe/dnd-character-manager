@@ -24,15 +24,16 @@ userRouter.post('/acceptRequest', (req, res) => {
             user.campaigns.push(req.body.campId);
         }
        
+        //Remove the request from the users list
         user.requests = user.requests.filter( reQ => {
             if(!reQ._id.equals(req.body.reqId)){
-                console.log(`added request ${reQ._id}`);
                 return reQ._id;
             }
         });
         
         user.save();
 
+        //Add the user to the campaign
         Campaign.findById(req.body.campId, (error, foundCamp) => {
             let obj={id: user._id}
             foundCamp.players.push(obj);
