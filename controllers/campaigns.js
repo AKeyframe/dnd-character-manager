@@ -26,16 +26,19 @@ campaignRouter.get('/new', (req, res) => {
 //Delete
 campaignRouter.delete('/:id', (req, res) => {
     Campaign.findByIdAndDelete(req.params.id, (error, delCamp) => {
-        User.findById(req.session.currentUser._id, (error, user) => {
-            console.log(user);
-            user.campaigns = user.campaigns.filter( (camp, i) => {
-                if(!camp.equals(delCamp._id)){
-                    console.log(`added char: ${camp}`);
-                    return camp;
-                }
-            }); //forEach
-            user.save();
-            console.log(user);
+        User.find({campaigns: delCamp._id}, (error, foundUsers) => {
+            console.log(foundUsers);
+            foundUsers.forEach( (user, i) => {
+                user.campaigns = user.campaigns.filter( (camp, i) => {
+                    if(!camp.equals(delCamp._id)){
+                        console.log(`added char: ${camp}`);
+                        return camp;
+                    }
+                }); //forEach
+                user.save();
+                console.log(user);
+            });
+            
         }); //User
         
         res.redirect("/campaigns");

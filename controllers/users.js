@@ -35,7 +35,7 @@ userRouter.post('/acceptRequest', (req, res) => {
 
         //Add the user to the campaign
         Campaign.findById(req.body.campId, (error, foundCamp) => {
-            let obj={id: user._id}
+            let obj={playerId: user._id}
             foundCamp.players.push(obj);
             foundCamp.save();
         });
