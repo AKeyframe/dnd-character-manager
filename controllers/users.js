@@ -17,18 +17,9 @@ const Character = require('../models/character');
 
 // Update
 
-// Create (registration route)
-userRouter.post('/', (req, res) => {
-    //overwrite the user password with the hashed password, then pass that in to our database
-    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(12));
-    User.create(req.body, (error, createdUser) => {
-        res.redirect('/');
-    });
-});
-
-
 userRouter.post('/acceptRequest', (req, res) => {
     User.findById(req.body.userId, (error, user) => {
+        // Add the campaign to the USer
         if(req.body.invType == 'campaign'){
             user.campaigns.push(req.body.campId);
         }
@@ -41,12 +32,20 @@ userRouter.post('/acceptRequest', (req, res) => {
         });
         
         user.save();
+
+        Campaign.findById(req.body.campId, (error, foundCamp) => {
+            let obj={id: user._id}
+            foundCamp.players.push(obj);
+            foundCamp.save();
+        });
+
         res.redirect(`/campaigns/${req.body.campId}`);
     });
 });
 
 userRouter.post('/declineRequest', (req, res) => {
     User.findById(req.body.userId, (error, user) => {
+        //Remove the request from User's list
         user.requests = user.requests.filter( reQ => {
             if(!reQ._id.equals(req.body.reqId)){
                 console.log(`added request ${reQ._id}`);
@@ -57,6 +56,19 @@ userRouter.post('/declineRequest', (req, res) => {
         res.redirect(`/user/${user.username}/requests`);
     });
 });
+
+
+// Create (registration route)
+userRouter.post('/', (req, res) => {
+    //overwrite the user password with the hashed password, then pass that in to our database
+    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(12));
+    User.create(req.body, (error, createdUser) => {
+        res.redirect('/');
+    });
+});
+
+
+
 
 userRouter.get("/:username/requests", (req, res) => {
     sesUser = req.session.currentUser;
