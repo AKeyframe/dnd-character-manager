@@ -26,21 +26,36 @@ campaignRouter.get('/new', (req, res) => {
 //Delete
 campaignRouter.delete('/:id', (req, res) => {
     Campaign.findByIdAndDelete(req.params.id, (error, delCamp) => {
+        //Find the users apart of the deleted campaign 
         User.find({campaigns: delCamp._id}, (error, foundUsers) => {
-            console.log(foundUsers);
+            //remove the deleted campaign from each users campaign list
             foundUsers.forEach( (user, i) => {
                 user.campaigns = user.campaigns.filter( (camp, i) => {
                     if(!camp.equals(delCamp._id)){
                         console.log(`added char: ${camp}`);
                         return camp;
                     }
-                }); //forEach
+                }); //filter
                 user.save();
-                console.log(user);
-            });
+                
+            }); //forEach()
             
         }); //User
-        
+        //Look for Chracters in the deleted campaign
+        Character.find({campaign: delCamp._id}, (err, foundChar) => {
+            //For each Character in the campaign remove the campaign
+            foundChar.forEach( (char, i) => {                
+                char.campaign = char.campaign.filter( (camp, i) => {
+                    if(!camp.equals(delCamp._id)) {
+                        return camp;
+                    }
+                }); //Filter
+                char.save();
+            });//forEach()
+            
+        });//Character
+
+
         res.redirect("/campaigns");
     }); //Campaign
 }); //Router

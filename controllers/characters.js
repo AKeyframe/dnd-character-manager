@@ -59,14 +59,8 @@ characterRouter.post('/', (req, res) => {
 characterRouter.post('/joinCampaign', (req, res) => {
     Character.findById(req.body.charId, (error, foundChar) => {
         Campaign.findById(req.body.campId, (campError, foundCamp) => {
-
-            console.log('========================================');
-            console.log(foundChar);
-            console.log(foundCamp);
-
+            
             //add the campaign to the character
-            console.log('-----------------------------------');
-            console.log(foundChar.campaign);
             foundChar.campaign.push(foundCamp._id);
             foundChar.save();
 
