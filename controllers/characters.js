@@ -83,6 +83,7 @@ characterRouter.post('/joinCampaign', (req, res) => {
         //find the campaign the user is adding the character to
         Campaign.findById(req.body.campId, (campError, foundCamp) => {
             let exists=false;
+            //If it's already there do nothing
             foundChar.campaign.forEach( camp => {
                 if(camp.equals(foundCamp._id)){
                     exists=true;
@@ -93,11 +94,26 @@ characterRouter.post('/joinCampaign', (req, res) => {
                 foundChar.campaign.push(foundCamp._id);
                 foundChar.save();
             }
-
+            
             //for each player in the campaign
             foundCamp.players.forEach( (p, i) => {
-                //find the correct user and add the charcter to that player within the campaign
-                if(p.playerId == req.session.currentUser) {
+
+                //find the correct user
+                if(p.playerId.equals(req.session.currentUser._id)) {
+                    //check if a character is already being played by this user
+                    if(p.character){
+                        //If one is find the character
+                        Character.findById(p.character, (e, prevChar) => {
+                            //Then remove the campaign from the character
+                            prevChar.campaign = prevChar.campaign.filter( pcCamp => {
+                                if(!pcCamp.equals(foundCamp._id)){
+                                    return pcCamp;
+                                }
+                            });//filter
+                            prevChar.save();
+                        });//Character (prevChar)
+                    }
+                    //Then add the charcter to that player within the campaign
                     p.character = foundChar._id;
                 }
             }); //forEach()
