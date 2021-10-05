@@ -25,6 +25,9 @@ characterRouter.delete('/:id', (req, res) => {
         User.findById(req.session.currentUser._id, (error, user) => {
             //Remove the character from User
             user.characters = user.characters.filter( (char, i) => {
+                console.log('---------------------------------------');
+                console.log(char);
+                console.log(delChar._id);
                 if(!char.equals(delChar._id)){
                     console.log(`added char: ${char}`);
                     return char;
@@ -73,16 +76,27 @@ characterRouter.post('/', (req, res) => {
 });
 
 //Adding a created character to a campaign
+//Probably should change the name of this eventually 
 characterRouter.post('/joinCampaign', (req, res) => {
+    //find the character selected by the user
     Character.findById(req.body.charId, (error, foundChar) => {
+        //find the campaign the user is adding the character to
         Campaign.findById(req.body.campId, (campError, foundCamp) => {
-
-            //add the campaign to the character
-            foundChar.campaign.push(foundCamp._id);
-            foundChar.save();
+            let exists=false;
+            foundChar.campaign.forEach( camp => {
+                if(camp.equals(foundCamp._id)){
+                    exists=true;
+                }
+            });
+            if(exists===false){
+                //add the campaign to the character
+                foundChar.campaign.push(foundCamp._id);
+                foundChar.save();
+            }
 
             //for each player in the campaign
             foundCamp.players.forEach( (p, i) => {
+                //find the correct user and add the charcter to that player within the campaign
                 if(p.playerId == req.session.currentUser) {
                     p.character = foundChar._id;
                 }

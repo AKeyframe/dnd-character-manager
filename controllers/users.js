@@ -58,6 +58,53 @@ userRouter.post('/declineRequest', (req, res) => {
     });
 });
 
+//Remove a player from a campaign
+userRouter.post('/leaveCampaign', (req, res) => {
+    //find this user
+    User.findById(req.body.userId, (error, user) => {
+        //find the campaign the user is leaving
+        Campaign.findById(req.body.campId, (err, camp) => {
+            //Remove the player from the campaigns player list
+            camp.players = camp.players.filter( player => {
+                if(!player.playerId.equals(user._id)) {
+                    return player;
+                }
+                else {
+                    //If the player has assigned a character to the campaign
+                    if(player.character){
+                        //If the character still exists
+                        if(player.character!==null){
+                            let charId = player.character._id;
+                            
+                            //Find the character that was associated with the campaign
+                            Character.findById(charId, (err, char) => {
+                                //remove the campaign from the character
+                                char.campaign = char.campaign.filter( game => {
+                                    if(!game.equals(req.body.campId)){
+                                        return game;
+                                    }
+                                }); //Filter
+                                char.save();
+                            });//Character
+                        }
+                    }//if(player.character)
+                }//else
+            });//filter
+            camp.save();
+
+            //Remove the campaign from the user
+            user.campaigns = user.campaigns.filter( c => {
+                if(!c.equals(req.body.campId)){
+                    return c;
+                }
+            });//filter
+            user.save();
+        }); //Campaign
+
+        res.redirect('/campaigns');
+    }); //User
+}); //Router
+
 
 // Create (registration route)
 userRouter.post('/', (req, res) => {
