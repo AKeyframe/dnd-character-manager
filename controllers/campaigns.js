@@ -32,7 +32,6 @@ campaignRouter.delete('/:id', (req, res) => {
             foundUsers.forEach( (user, i) => {
                 user.campaigns = user.campaigns.filter( (camp, i) => {
                     if(!camp.equals(delCamp._id)){
-                        console.log(`added char: ${camp}`);
                         return camp;
                     }
                 }); //filter
