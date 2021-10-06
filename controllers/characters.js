@@ -92,8 +92,11 @@ characterRouter.post('/', (req, res) => {
             if(i===4) {createdChar.stats.wis.mod=mod;}
             if(i===5) {createdChar.stats.cha.mod=mod;}
         });
+        createdChar.hp.cur = createdChar.hp.max;
+
         createdChar.save();
-        console.log(createdChar);
+        
+
         //Add the new character to the user
         User.findById(req.session.currentUser._id, (error, user) => {
             user.characters.push(createdChar._id);

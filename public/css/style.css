@@ -81,6 +81,7 @@ nav {
 
 /* ------------------------------------------------------*/
 /* #region Register Page */
+
 #signUpDiv {
     display: flex;
     justify-content: center;
@@ -89,3 +90,68 @@ nav {
 }
 
 /* #endregion Register Page */
+
+/* #region Character Index / Shorthand */
+.characterDiv {
+    margin: 5px;
+}
+
+.characterDiv h3 {
+    margin: 5px;
+}
+
+.charName {
+    margin: auto 0;
+}
+
+.sCharTop {
+    display: flex;
+    justify-content: space-between;
+}
+
+.basicCharInfo {
+    display: flex;
+}
+
+.basicCharInfo h4{
+    margin: auto 10px;
+    margin-top: 8px;
+}
+
+.statContainer {
+    display: flex;
+}
+
+.combatStats {
+    margin: auto 0;
+}
+
+.stats {
+    display: flex;
+}
+
+.stats h4, .stats h5, .combatStats h4, .combatStats h5 {
+    text-align: center;
+    font-size: 12px;
+    margin: 1px;
+}
+
+.stats h4 {
+    font-size: 20px;
+}
+
+.combatStats h5 {
+    margin-top: 3px;
+    margin-left: 10px;
+    margin-right: 15px;
+    font-size: 12px;
+    text-align: left;
+}
+
+.indStat {
+    margin: 5px;
+}
+
+
+
+/* #endregion Character Index / Shorthand */

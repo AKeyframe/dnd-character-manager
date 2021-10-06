@@ -9,10 +9,68 @@
     
     <% if(chars.length != 0) { %>
         <% chars.forEach( (c, i) => { %>
-            <a href='/characters/<%= c._id %>'><h3><%= c.name %></h3></a>
-            <form action="/characters/<%= c._id%>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete Character">
-            </form>
+            <div class="characterDiv">
+                <div class=sCharTop>
+                    <div class="charName">
+                        <a href='/characters/<%= c._id %>'><h3><%= c.name %></h3></a>
+                    </div>
+                    
+                    <div class=basicCharInfo>
+                        <h4>Class: <%=c.class%></h4>
+                        <h4>Lvl: <%=c.level%></h4>
+                        <h4>Race: <%=c.race%></h4>
+                        <h4>Alignment: <%=c.alignment%></h4>
+                    </div>
+                </div>
+
+                <div class="statContainer">
+                    <div class="combatStats">
+                        <h5>AC: <%=c.ac%></h5>
+                        <h5>HP: <%=c.hp.cur%> / <%=c.hp.max%></h5>
+                    </div>
+                    <div class="stats">
+                        <div class="indStat">
+                            <h4>+<%=c.stats.str.mod%></h4>
+                            <h5><%=c.stats.str.val%></h5>
+                            <h5>Strength</h5>
+                        </div>
+
+                        <div class="indStat">
+                            <h4>+<%=c.stats.dex.mod%></h4>
+                            <h5><%=c.stats.dex.val%></h5>
+                            <h5>Dexterity</h5>
+                        </div>
+
+                        <div class="indStat">
+                            <h4>+<%=c.stats.con.mod%></h4>
+                            <h5><%=c.stats.con.val%></h5>
+                            <h5>Constitution</h5>
+                        </div>
+
+                        <div class="indStat">
+                            <h4>+<%=c.stats.int.mod%></h4>
+                            <h5><%=c.stats.int.val%></h5>
+                            <h5>Intelligence</h5>
+                        </div>
+
+                        <div class="indStat">
+                            <h4>+<%=c.stats.wis.mod%></h4>
+                            <h5><%=c.stats.wis.val%></h5>
+                            <h5>Wisdom</h5>
+                        </div>
+
+                        <div class="indStat">
+                            <h4>+<%=c.stats.cha.mod%></h4>
+                            <h5><%=c.stats.cha.val%></h5>
+                            <h5>Charisma</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="/characters/<%= c._id%>?_method=DELETE" method="POST">
+                    <input type="submit" value="Delete Character">
+                </form>
+            </div>
         <% }) %>
     <% } %>
 </body>
