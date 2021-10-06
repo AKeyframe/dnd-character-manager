@@ -93,7 +93,7 @@ nav {
 
 /* #region Character Index / Shorthand */
 .characterDiv {
-    margin: 5px;
+    margin: 5px auto;
 }
 
 .characterDiv h3 {
@@ -107,6 +107,7 @@ nav {
 .sCharTop {
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
 }
 
 .basicCharInfo {
@@ -120,6 +121,7 @@ nav {
 
 .statContainer {
     display: flex;
+    margin: 0 auto;
 }
 
 .combatStats {

@@ -5,5 +5,10 @@
 <body>
     <%- include('../partials/nav.ejs'); %>
     <h3><%= char.name %></h3>
+
+
+    <form action="/characters/<%= char._id%>?_method=DELETE" method="POST">
+        <input type="submit" value="Delete Character">
+    </form>
 </body>
 </html>
