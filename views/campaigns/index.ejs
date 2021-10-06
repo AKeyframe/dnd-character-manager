@@ -5,6 +5,8 @@
     <%- include('../partials/nav.ejs'); %>
     <h1>Your Campaigns</h1>
 
+    <a href="/campaigns/new">Create A Campaign</a>
+
     <% if(camps.length != 0) { %>
         <% camps.forEach( (c, i) => { %>
             <% if(c.dm == user._id ) { %>

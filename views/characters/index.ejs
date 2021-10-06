@@ -4,6 +4,8 @@
 <body>
     <%- include('../partials/nav.ejs'); %>
     <h1>Your Characters</h1>
+
+    <a href="/characters/new">Create A Character</a>
     
     <% if(chars.length != 0) { %>
         <% chars.forEach( (c, i) => { %>

@@ -62,7 +62,39 @@ characterRouter.delete('/:id', (req, res) => {
 //Create
 characterRouter.post('/', (req, res) => {
     Character.create(req.body, (error, createdChar) => {
-        console.log(req.body);
+       
+        //DnD Math Ignore until next comment --- Converts stat to modifier
+        let stats = [createdChar.stats.str.val,
+                        createdChar.stats.dex.val,
+                        createdChar.stats.con.val,
+                        createdChar.stats.int.val,
+                        createdChar.stats.wis.val,
+                        createdChar.stats.cha.val];
+        
+        stats.forEach( (stat, i) => {
+            let mod;
+            if(stat>=20) {mod=5;}
+            if(stat>=18 && stat<20) {mod=4;}
+            if(stat>=16 && stat<18) {mod=3;}
+            if(stat>=14 && stat<16) {mod=2;}
+            if(stat>=12 && stat<14) {mod=1;}
+            if(stat>=10 && stat<12) {mod=0;}
+            if(stat>=8 && stat<10) {mod=-1;}
+            if(stat>=6 && stat<8) {mod=-2;}
+            if(stat>=4 && stat<6) {mod=-3;}
+            if(stat>=2 && stat<4) {mod=-4;}
+            if(stat>=1 && stat<2) {mod=-5;}
+            console.log(mod);
+            if(i===0) {createdChar.stats.str.mod=mod;}
+            if(i===1) {createdChar.stats.dex.mod=mod;}
+            if(i===2) {createdChar.stats.con.mod=mod;}
+            if(i===3) {createdChar.stats.int.mod=mod;}
+            if(i===4) {createdChar.stats.wis.mod=mod;}
+            if(i===5) {createdChar.stats.cha.mod=mod;}
+        });
+        createdChar.save();
+        console.log(createdChar);
+        //Add the new character to the user
         User.findById(req.session.currentUser._id, (error, user) => {
             user.characters.push(createdChar._id);
             user.save();
@@ -156,6 +188,7 @@ characterRouter.post('/joinCampaign', (req, res) => {
 //Show
 characterRouter.get('/:id', (req, res) => {
     Character.findById(req.params.id, (error, foundCharacter) =>{
+        console.log(foundCharacter);
         res.render('characters/show.ejs', {char: foundCharacter, user: req.session.currentUser});
     });
 });

@@ -6,13 +6,181 @@
     <h1>Character Creation</h1>
 
     <div>
-        <form action="/characters" method="POST">
-            <input type="hidden" name="creator" value="<%= user._id %>">
-            <input type="text" name="name" placeholder="Name"><br>
+        <form class="charForm" action="/characters" method="POST">
+            
+                <input type="hidden" name="creator" value="<%= user._id %>">
+            
+            <div class="inpCharName"></div>
+                <input type="text" name="name" placeholder="Name"><br>
+            </div>
+
             <input type="text" name="race" placeholder="race"><br>
             <input type="text" name="class" placeholder="class"><br>
-            
+            <input type="number" name="level" placeholder="level"><br>
+            <br>
 
+            <label for=hp>HP</label>
+            <input id=hp type="number" name=hp placeholder ="HP"><br>
+
+            <label for=ac>AC</label>
+            <input id=ac type="number" name=ac placeholder="AC"><br>
+
+            
+            <fieldset class="stats">
+                <legend>Stats</legend>
+
+                <label for="str">Strength</label>
+                <input id="str" type="number" name="stats.str.val" min=1 max=20 placeholder="10"><br>
+
+                <label for="dex">Dexterity</label>
+                <input id="dex" type="number" name=stats.dex.val min=1 max=20 placeholder="10"><br>
+
+                <label for="con">Constitution</label>
+                <input id="con" type="number" name=stats.con.val min=1 max=20 placeholder="10"><br>
+
+                <label for="int">Intelligence</label>
+                <input id="int" type="number" name=stats.int.val min=1 max=20 placeholder="10"><br>
+
+                <label for="wis">Wisdom</label>
+                <input id="wis" type="number" name=stats.wis.val min=1 max=20 placeholder="10"><br>
+
+                <label for="cha">Charisma</label>
+                <input id="cha" type="number" name=stats.cha.val min=1 max=20 placeholder="10"><br>
+            </fieldset>
+            
+            
+            <fieldset class="skills">
+                <legend>Skills</legend>
+
+                <label for=acrobatics>Acrobatics</label>
+                <select id=acrobatics name=skills.acrobatics.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=animalHandling>Animal Handling</label>
+                <select id=animalHandling name=skills.animalHandling.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=arcana>Arcana</label>
+                <select id=arcana name=skills.arcana.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=athletics>Athletics</label>
+                <select id=athletics name=skills.athletics.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=deception>Deception</label>
+                <select id=deception name=skills.deception.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=history>History</label>
+                <select id=history name=skills.history.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=insight>Insight</label>
+                <select id=insight name=skills.insight.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=intimidation>Intimidation</label>
+                <select id=intimidation name=skills.intimidation.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=investigation>Investigation</label>
+                <select id=investigation name=skills.investigation.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=medicine>Medicine</label>
+                <select id=medicine name=skills.medicine.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=nature>Nature</label>
+                <select id=nature name=skills.nature.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=perception>Perception</label>
+                <select id=perception name=skills.perception.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=performance>Performance</label>
+                <select id=performance name=skills.performance.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=persuasion>Persuasion</label>
+                <select id=persuasion name=skills.persuasion.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=religion>Religion</label>
+                <select id=religion name=skills.religion.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=slightOfHand>Slight Of Hand</label>
+                <select id=slightOfHand name=skills.slightOfHand.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=stealth>Stealth</label>
+                <select id=stealth name=skills.stealth.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+
+                <label for=survival>Survival</label>
+                <select id=survival name=skills.survival.prof>
+                    <option value="Not Proficient">Not Proficient</option>
+                    <option value="Proficient">Proficient</option>
+                    <option value="Expertise">Expertise</option>
+                </select><br>
+                
+
+            </fieldset>
+ 
             <input type="submit" value="Create Character">
         </form>
     </div>
