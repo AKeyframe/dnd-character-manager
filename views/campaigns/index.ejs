@@ -12,12 +12,30 @@
             <% if(c.dm == user._id ) { %>
                 <a href='/campaigns/<%= c._id %>'><h3><%= c.name %></h3></a>
 
+                
+
                 <form action="/campaigns/<%= c._id%>?_method=DELETE" method="POST">
                     <input type="submit" value="Delete Campaign">
                 </form>
 
             <% } else { %>
                 <a href='/campaigns/<%= c._id %>'><h3><%= c.name %></h3></a>
+
+                <div>
+                    <div><h4>Players:</h4></div>
+                    <div>
+                        <% if(c.players.length !== 0) { %>
+                            <% c.players.forEach( p => { %>
+                                <h4><%=p.playerId.username %></h4>
+
+                            <% }); %>
+                        <% } else { %>
+                            <h4>No Players Currently</h4>
+                        <% } %>
+
+                    </div>
+                </div>
+
 
                 <form action="/user/leaveCampaign" method="POST">
                     <input type="hidden" name="campId" value="<%= c._id %>">

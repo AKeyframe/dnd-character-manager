@@ -16,18 +16,20 @@
                     </div>
                     
                     <div class=basicCharInfo>
-                        <h4>Class: <%=c.class%></h4>
                         <h4>Lvl: <%=c.level%></h4>
-                        <h4>Race: <%=c.race%></h4>
+                        <h4><%=c.race%></h4>
+                        <h4><%=c.class%></h4>
                         <h4>Alignment: <%=c.alignment%></h4>
                     </div>
                 </div>
 
                 <div class="statContainer">
                     <div class="combatStats">
+                        <h5>HP: <%=c.hp.cur%>/<%=c.hp.max%></h5>
                         <h5>AC: <%=c.ac%></h5>
-                        <h5>HP: <%=c.hp.cur%> / <%=c.hp.max%></h5>
+                        <h5>DC: <%=c.dc%></h5>
                     </div>
+
                     <div class="stats">
                         <div class="indStat">
                             <h4>+<%=c.stats.str.mod%></h4>

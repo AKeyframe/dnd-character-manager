@@ -4,9 +4,123 @@
     <%- include('../partials/head.ejs'); %>
 <body>
     <%- include('../partials/nav.ejs'); %>
-    <h3><%= char.name %></h3>
+    <div>
+        <div>
+            <h2 style="text-align:center"><%= char.name %></h2>
+            
+        </div>
+    </div>
 
+    <div class="charInfo">
+        <div class="info">
+            <h4>Race: <%= char.race %></h4>
+            <h4>Class: <%= char.class %></h4>
+            
+        </div>
 
+        <div class="info">
+            <h4><%=char.prof%></h4>
+            <h4>Proficiency</h4>
+            <h4>Bonus</h4>
+        </div>
+
+        <div class="health">
+            <div class="hpValue">
+                <h4>HP</h4>
+                <h4><%= char.hp.cur %> / <%= char.hp.max %></h4>
+            </div>
+            <div class="hpMod">
+                <form class="inputHp">
+                    <input type="submit" name="hpMod" value="Heal">
+                    <input type="number" min=0 max="<%=char.hp.max %>" placeholder="<%= char.hp.cur%>">
+                    <input type="submit" name="hpMod" value="Damage">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="center">
+        <div class="stats">
+            <div class="indStat">
+                <h4>+<%=char.stats.str.mod%></h4>
+                <h5><%=char.stats.str.val%></h5>
+                <h5>Strength</h5>
+            </div>
+
+            <div class="indStat">
+                <h4>+<%=char.stats.dex.mod%></h4>
+                <h5><%=char.stats.dex.val%></h5>
+                <h5>Dexterity</h5>
+            </div>
+
+            <div class="indStat">
+                <h4>+<%=char.stats.con.mod%></h4>
+                <h5><%=char.stats.con.val%></h5>
+                <h5>Constitution</h5>
+            </div>
+
+            <div class="indStat">
+                <h4>+<%=char.stats.int.mod%></h4>
+                <h5><%=char.stats.int.val%></h5>
+                <h5>Intelligence</h5>
+            </div>
+
+            <div class="indStat">
+                <h4>+<%=char.stats.wis.mod%></h4>
+                <h5><%=char.stats.wis.val%></h5>
+                <h5>Wisdom</h5>
+            </div>
+
+            <div class="indStat">
+                <h4>+<%=char.stats.cha.mod%></h4>
+                <h5><%=char.stats.cha.val%></h5>
+                <h5>Charisma</h5>
+            </div>
+        </div>
+    </div>
+    <div id="showCombatStats" class="combatStats">
+        <div>
+            <h4>+<%= char.initiative %></h4>
+            <h4>Initiative</h4>
+        </div>
+
+        <div>
+            <h4><%= char.ac %></h4>
+            <h4>Armor</h4>
+            <h4>Class</h4>
+        </div>
+        <div>
+            <h4><%= char.dc %></h4>
+            <h4>Difficulty</h4>
+            <h4>Class</h4>
+        </div>
+    </div>
+    <div>
+        <div class="skills">
+            <h4>Acrobatics: <%= char.skills.acrobatics.prof %> </h4>
+            <h4>AnimalHandling: <%= char.skills.animalHandling.prof %></h4>
+            <h4>Arcana: <%= char.skills.arcana.prof %></h4>
+            <h4>Athletics: <%= char.skills.athletics.prof %></h4>
+            <h4>Deception: <%= char.skills.deception.prof %></h4>
+            <h4>History: <%= char.skills.history.prof %></h4>
+            <h4>Insight: <%= char.skills.insight.prof %></h4>
+            <h4>Intimidation: <%= char.skills.intimidation.prof %></h4>
+            <h4>Investigation: <%= char.skills.investigation.prof %></h4>
+            <h4>Medicine: <%= char.skills.medicine.prof %></h4>
+            <h4>Nature: <%= char.skills.nature.prof %></h4>
+            <h4>Perception: <%= char.skills.perception.prof %></h4>
+            <h4>Performance: <%= char.skills.performance.prof %></h4>
+            <h4>Persuasion: <%= char.skills.persuasion.prof %></h4>
+            <h4>Religion: <%= char.skills.religion.prof %></h4>
+            <h4>SlightOfHand: <%= char.skills.slightOfHand.prof %></h4>
+            <h4>Stealth: <%= char.skills.stealth.prof %></h4>
+            <h4>Survival: <%= char.skills.survival.prof %></h4>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <a href="/characters/<%=char._id%>/edit">Edit</a>
     <form action="/characters/<%= char._id%>?_method=DELETE" method="POST">
         <input type="submit" value="Delete Character">
     </form>

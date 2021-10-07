@@ -32,10 +32,6 @@ nav {
     justify-content: center;
 }
 
-#signUp {
-    margin: 50px 300px; 
-}
-
 /*----------------------------------------------------------*/
 /* #region Dropdowns */
 .dropLink {
@@ -91,9 +87,12 @@ nav {
 
 /* #endregion Register Page */
 
+/* ------------------------------------------------------*/
 /* #region Character Index / Shorthand */
+
 .characterDiv {
-    margin: 5px auto;
+    margin: 20px auto;
+    padding: 0px 20px;
 }
 
 .characterDiv h3 {
@@ -116,7 +115,7 @@ nav {
 
 .basicCharInfo h4{
     margin: auto 10px;
-    margin-top: 8px;
+    margin-top: 9px;
 }
 
 .statContainer {
@@ -157,3 +156,50 @@ nav {
 
 
 /* #endregion Character Index / Shorthand */
+
+/* ------------------------------------------------------*/
+/* #region Character Show */
+#showCombatStats{
+    display:flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    margin: 20px 10px 10px 10px;
+}
+
+.charInfo{
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    margin: 20px;
+
+}
+
+.health {
+    display: flex;
+}
+
+.hpValue, .hpMod {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputHp {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.inputHp input {
+    text-align: center;
+}
+
+.hpValue h4, .hpMod h4, .info h4 {
+    margin: 1.5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+
+/* #endregion Character Show */
+
+

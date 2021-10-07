@@ -3,6 +3,7 @@ const characterRouter = express.Router();
 const Character = require('../models/character');
 const Campaign = require('../models/campaign');
 const User = require('../models/user');
+const { create } = require('../models/character');
 
 
 //Index
@@ -25,9 +26,6 @@ characterRouter.delete('/:id', (req, res) => {
         User.findById(req.session.currentUser._id, (error, user) => {
             //Remove the character from User
             user.characters = user.characters.filter( (char, i) => {
-                console.log('---------------------------------------');
-                console.log(char);
-                console.log(delChar._id);
                 if(!char.equals(delChar._id)){
                     console.log(`added char: ${char}`);
                     return char;
@@ -58,18 +56,78 @@ characterRouter.delete('/:id', (req, res) => {
 
 
 //Update
+characterRouter.put('/:id', (req, res) => {
+    Character.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, createdChar) =>{
+        //DnD Math Ignore until next comment --- Converts stat to modifier
+        let expPerLvl = [0, 300, 900, 2700, 6500,
+            14000, 23000, 34000, 48000, 64000,
+            85000, 100000, 120000, 140000, 165000,
+            195000, 225000, 265000, 305000, 355000];
+
+        let stats = [createdChar.stats.str.val,
+                    createdChar.stats.dex.val,
+                    createdChar.stats.con.val,
+                    createdChar.stats.int.val,
+                    createdChar.stats.wis.val,
+                    createdChar.stats.cha.val];
+        let lvl = createdChar.level;
+
+        stats.forEach( (stat, i) => {
+            let mod;
+            if(stat>=20) {mod=5;}
+            if(stat>=18 && stat<20) {mod=4;}
+            if(stat>=16 && stat<18) {mod=3;}
+            if(stat>=14 && stat<16) {mod=2;}
+            if(stat>=12 && stat<14) {mod=1;}
+            if(stat>=10 && stat<12) {mod=0;}
+            if(stat>=8 && stat<10) {mod=-1;}
+            if(stat>=6 && stat<8) {mod=-2;}
+            if(stat>=4 && stat<6) {mod=-3;}
+            if(stat>=2 && stat<4) {mod=-4;}
+            if(stat>=1 && stat<2) {mod=-5;}
+            console.log(mod);
+            if(i===0) {createdChar.stats.str.mod=mod;}
+            if(i===1) {createdChar.stats.dex.mod=mod;}
+            if(i===2) {createdChar.stats.con.mod=mod;}
+            if(i===3) {createdChar.stats.int.mod=mod;}
+            if(i===4) {createdChar.stats.wis.mod=mod;}
+            if(i===5) {createdChar.stats.cha.mod=mod;}
+        });
+
+        if(lvl < 5){createdChar.prof = 2;}
+        if(lvl<9 && lvl>=5){createdChar.prof = 3;}
+        if(lvl<13 && lvl>=9){createdChar.prof = 4;}
+        if(lvl<17 && lvl>=13){createdChar.prof = 5;}
+        if(lvl<=20 && lvl>=17){createdChar.prof = 6;}
+
+        createdChar.exp = expPerLvl[parseInt(createdChar.level)-1]
+        createdChar.hp.cur = createdChar.hp.max;
+        createdChar.dc = 8+createdChar.prof+createdChar.stats.int.mod;
+        createdChar.initiative = createdChar.stats.dex.mod;
+
+        createdChar.save();
+
+        res.render('characters/show.ejs', {char: createdChar, user: req.session.currentUser});
+    });
+});
 
 //Create
 characterRouter.post('/', (req, res) => {
     Character.create(req.body, (error, createdChar) => {
        
         //DnD Math Ignore until next comment --- Converts stat to modifier
+        let expPerLvl = [0, 300, 900, 2700, 6500,
+                        14000, 23000, 34000, 48000, 64000,
+                        85000, 100000, 120000, 140000, 165000,
+                        195000, 225000, 265000, 305000, 355000];
+
         let stats = [createdChar.stats.str.val,
                         createdChar.stats.dex.val,
                         createdChar.stats.con.val,
                         createdChar.stats.int.val,
                         createdChar.stats.wis.val,
                         createdChar.stats.cha.val];
+        let lvl = createdChar.level;
         
         stats.forEach( (stat, i) => {
             let mod;
@@ -92,7 +150,52 @@ characterRouter.post('/', (req, res) => {
             if(i===4) {createdChar.stats.wis.mod=mod;}
             if(i===5) {createdChar.stats.cha.mod=mod;}
         });
+        
+        
+
+        if(lvl < 5){createdChar.prof = 2;}
+        if(lvl<9 && lvl>=5){createdChar.prof = 3;}
+        if(lvl<13 && lvl>=9){createdChar.prof = 4;}
+        if(lvl<17 && lvl>=13){createdChar.prof = 5;}
+        if(lvl<=20 && lvl>=17){createdChar.prof = 6;}
+
+        createdChar.exp = expPerLvl[parseInt(createdChar.level)-1]
         createdChar.hp.cur = createdChar.hp.max;
+        createdChar.dc = 8+createdChar.prof+createdChar.stats.int.mod;
+        createdChar.initiative = createdChar.stats.dex.mod;
+        
+        // Object.keys(createdChar.skills).forEach( (s, i) => {
+        //         if(i === 0 || i=== 15 || i === 16 ){
+        //             s.mod.sType = 'dex';
+        //             s.mod.val = createdChar.stats.dex.mod;
+        //         }
+        //         else if (i === 1 || i === 6 || i === 9 || i===11 || i===17){
+        //             s.mod.sType = 'wis';
+        //             s.mod.val = createdChar.stats.wis.mod;
+        //         }
+        //         else if (i === 2 || i === 5 || i === 8 || i === 10 || i === 14){
+        //             s.mod.sType = 'int';
+        //             s.mod.val = createdChar.stats.int.mod;
+        //         }
+        //         else if (i === 3) {
+        //             s.mod.sType = 'str';
+        //             s.mod.val = createdChar.stats.str.mod;
+        //         }
+        //         else if (i === 4 || i === 7 || i === 12 || i === 13){
+        //             s.mod.sType = 'cha';
+        //             s.mod.val = createdChar.stats.cha.mod;
+        //         }
+                
+        //         if(s.prof === 'Not Proficient'){
+        //             s.bonus = parseInt(s.mod.val);
+        //         }
+        //         else if (s.prof === 'Proficient') {
+        //             s.bonus = parseInt(s.mod.val)+parseInt(createdChar.prof);
+        //         }
+        //         else if (s.prof === 'Expertise'){
+        //             s.bonus = parseInt(s.mod.val)+(parseInt(createdChar.prof)*2);
+        //         }
+        // });
 
         createdChar.save();
         
@@ -187,11 +290,15 @@ characterRouter.post('/joinCampaign', (req, res) => {
 
 
 //Edit
+characterRouter.get('/:id/edit', (req, res) => {
+    Character.findById(req.params.id, (error, foundChar) => {
+        res.render('characters/edit.ejs', {char: foundChar, user: req.session.currentUser});
+    });
+});
 
 //Show
 characterRouter.get('/:id', (req, res) => {
     Character.findById(req.params.id, (error, foundCharacter) =>{
-        console.log(foundCharacter);
         res.render('characters/show.ejs', {char: foundCharacter, user: req.session.currentUser});
     });
 });
