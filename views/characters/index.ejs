@@ -3,16 +3,16 @@
     <%- include('../partials/head.ejs'); %>
 <body>
     <%- include('../partials/nav.ejs'); %>
-    <h1>Your Characters</h1>
+    <h1 class="pageHead">Your Characters</h1>
 
-    <a href="/characters/new">Create A Character</a>
+    <a class="ltab" href="/characters/new">Create A Character</a>
     
     <% if(chars.length != 0) { %>
         <% chars.forEach( (c, i) => { %>
-            <div class="characterDiv">
+            <div class="characterDiv backgroundDiv">
                 <div class=sCharTop>
                     <div class="charName">
-                        <a href='/characters/<%= c._id %>'><h3><%= c.name %></h3></a>
+                        <a class="htal" href='/characters/<%= c._id %>'><h3><%= c.name %></h3></a>
                     </div>
                     
                     <div class=basicCharInfo>

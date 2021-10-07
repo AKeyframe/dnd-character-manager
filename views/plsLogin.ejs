@@ -4,32 +4,39 @@
 
 <body>
     <%- include('partials/navNoLog.ejs'); %>
-    <h1>plsLogin Page</h1>
+    
     <div class="center">
+        <div class=head>
+            <h1 style="text-align: center;">Login</h1>
+        </div>
+
         <div class="loginForm">
-            <br><br><br><br>
-            <h2>Login Info</h2>
             <form action="/sessions" method="POST">
-                <label for="username">Username: </label>
-                <input id="username" name="username" type="text" placeholder="Username"><br>
+                <div>
+                    <label for="username">Username: </label>
+                    <input id="username" name="username" type="text" placeholder="Username"><br>
+                </div>
 
-                <label id="password">Password: </label>
-                <input id="password" name="password" type="text" placeholder="Password"><br>
+                <div>
+                    <label id="password">Password:   </label>
+                    <input id="password" name="password" type="password" placeholder="Password"><br>
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="Log In">
+                </form>
+                        <form action="/register" method="GET">
+                                <input id="signUp" type="submit" value="Sign Up">
+                        </form>
+                   
+                        
+                   
+                        
+                </div>
 
-                <input type="submit" value="Log In">
-            </form>
+            
         </div>
 
         <br> 
     </div>
-    <div class="signUpButton">
-        <form action="/register" method="GET">
-                <input id="signUp" type="submit" value="Sign Up">
-        </form>
-    </div>
-
-
-
-
 </body>
 </html>

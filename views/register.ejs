@@ -5,21 +5,23 @@
 <body>
     <%- include('partials/navNoLog.ejs'); %>
 
-    <h1>Create an Account</h1>
+    <h1 id=regPageHead style="text-align: center;">Create an Account</h1>
 
 
     <div id="signUpDiv">
         <form action="/user" method="POST">
             <label for="email">Email</label>
-            <input id="email" type="Text" name="email" placeholder="Email"><br>
+            <input id="email" type="email" name="email" placeholder="Email"><br>
 
             <label for="username">Username</label>
             <input id="username" type="text" name="username" placeholder="Username"><br>
 
             <label for="password">Password</label>
-            <input id="Password" type="text" name="password" placeholder="Password"><br>
+            <input id="Password" type="password" name="password" placeholder="Password"><br>
 
-            <input type="submit" value="Create Account">
+            <div class=buttons>
+                <input type="submit" value="Create Account">
+            </div>
         </form>
     </div>
 </body>
