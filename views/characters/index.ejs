@@ -3,9 +3,12 @@
     <%- include('../partials/head.ejs'); %>
 <body>
     <%- include('../partials/nav.ejs'); %>
-    <h1 class="pageHead">Your Characters</h1>
-
-    <a class="ltab" href="/characters/new">Create A Character</a>
+    <div class="headDiv">
+        <h1 class="pageHead">Your Characters</h1>
+        <div id="creButDiv">
+            <a class="ltab" href="/characters/new">Create A Character</a>
+        </div>
+    </div>
     
     <% if(chars.length != 0) { %>
         <% chars.forEach( (c, i) => { %>

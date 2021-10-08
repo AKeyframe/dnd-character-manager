@@ -5,70 +5,70 @@
 <body>
     <%- include('../partials/nav.ejs'); %>
 <form action="/characters/<%=char._id%>?_method=PUT" method=POST>
-    <div>
+    <div class="pageHead backgroundDiv">
         <div>
             <label for="charName">Name: </label>
-            <input id="charName" type=text name="name" value="<%= char.name %>">
+            <input id="charName" class=onBlack type=text name="name" value="<%= char.name %>">
             
             <label for="lvl">Level</label>
-            <input id=lvl type="number" min=1 max=99 name=level value="<%=char.level %>">
+            <input id=lvl class=onBlack type="number" min=1 max=99 name=level value="<%=char.level %>">
 
             <input type=submit value="Save Changes">
         </div>
     </div>
 
-    <div class="charInfo">
-        <div class="info">
+    <div class="charInfo ">
+        <div class="info backgroundDiv">
             <label for="race">Race: </label>
-            <input id="race" type="text" name="race" value="<%= char.race %>"><br>
+            <input id="race" class=onBlack type="text" name="race" value="<%= char.race %>"><br>
             
             <label for="class">Class: </label>
-            <input id="class" type=text name="class" value="<%= char.class %>">  
+            <input id="class" class=onBlack type=text name="class" value="<%= char.class %>">  
         </div>
 
         <div class="info">
            
         </div>
 
-        <div class="health">
-            <div class="hpValue">
+        <div class="health backgroundDiv">
+            <div class="hpValue inpCent">
                 <label for=hp>Max HP</label>
-                <input id=hp type=number min=1 max=999 name=hp.max value="<%= char.hp.max %>">
+                <input id=hp class="onBlack inpCent" type=number min=1 max=999 name=hp.max value="<%= char.hp.max %>">
         
             </div>
         </div>
     </div>
 
-    <div class="center">
+    <div class="center backgroundDiv">
         <div class="stats">
-            <div class="indStat">
-                <input id=str type="number" min=1 max=20 name=stats.str.val value="<%=char.stats.str.val%>"><br>
+            <div class="indStat ">
+                <input id=str class="onBlack inpCent" type="number" min=1 max=20 name=stats.str.val value="<%=char.stats.str.val%>"><br>
                 <label for=str>Strength</label>
                 
             </div>
 
             <div class="indStat">
-                <input id=dex type="number" min=1 max=20 name=stats.dex.val value="<%=char.stats.dex.val%>"><br>
+                <input id=dex class="onBlack inpCent" type="number" min=1 max=20 name=stats.dex.val value="<%=char.stats.dex.val%>"><br>
                 <label for=dex>Dexterity</label>
             </div>
 
             <div class="indStat">
-                <input id=con type="number" min=1 max=20 name=stats.con.val value="<%=char.stats.con.val%>"><br>
+                <input id=con class="onBlack inpCent" type="number" min=1 max=20 name=stats.con.val value="<%=char.stats.con.val%>"><br>
                 <label for=con>Constitution</label>
             </div>
 
             <div class="indStat">
-                <input id=int type="number" min=1 max=20 name=stats.int.val value="<%=char.stats.int.val%>"><br>
+                <input id=int class="onBlack inpCent" type="number" min=1 max=20 name=stats.int.val value="<%=char.stats.int.val%>"><br>
                 <label for=int>Intelligence</label>
             </div>
 
             <div class="indStat">
-                <input id=wis type="number" min=1 max=20 name=stats.wis.val value="<%=char.stats.wis.val%>"><br>
+                <input id=wis class="onBlack inpCent" type="number" min=1 max=20 name=stats.wis.val value="<%=char.stats.wis.val%>"><br>
                 <label for=wis>Wisdom</label>
             </div>
 
             <div class="indStat">
-                <input id=cha type="number" min=1 max=20 name=stats.cha.val value="<%=char.stats.cha.val%>"><br>
+                <input id=cha class="onBlack inpCent" type="number" min=1 max=20 name=stats.cha.val value="<%=char.stats.cha.val%>"><br>
                 <label for=cha>Charisma</label>
             </div>
         </div>
@@ -76,138 +76,138 @@
 
     <div id="showCombatStats" class="combatStats">
 
-        <div>
-            <input id=ac type="number" name=ac min=0 max= 99 value="<%=char.ac %>"><br>
+        <div class=backgroundDiv>
+            <input id=ac class="onBlack inpCent" type="number" name=ac min=0 max= 99 value="<%=char.ac %>"><br>
             <label for=ac>Armor <br> Class</label>
         </div>
     </div>
 
     <div>
-        <div class="skills">
+        <div class="skills backgroundDiv">
             <fieldset class="skillsInp">
                 <legend>Skills</legend>
 
                 <label for=acrobatics>Acrobatics</label>
-                <select id=acrobatics name=skills.acrobatics.prof>
+                <select id=acrobatics class="onBlack inpCent" name=skills.acrobatics.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=animalHandling>Animal Handling</label>
-                <select id=animalHandling name=skills.animalHandling.prof>
+                <select id=animalHandling class="onBlack inpCent" name=skills.animalHandling.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=arcana>Arcana</label>
-                <select id=arcana name=skills.arcana.prof>
+                <select id=arcana class="onBlack inpCent" name=skills.arcana.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=athletics>Athletics</label>
-                <select id=athletics name=skills.athletics.prof>
+                <select id=athletics class="onBlack inpCent" name=skills.athletics.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=deception>Deception</label>
-                <select id=deception name=skills.deception.prof>
+                <select id=deception class="onBlack inpCent" name=skills.deception.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=history>History</label>
-                <select id=history name=skills.history.prof>
+                <select id=history class="onBlack inpCent" name=skills.history.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=insight>Insight</label>
-                <select id=insight name=skills.insight.prof>
+                <select id=insight class="onBlack inpCent" name=skills.insight.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=intimidation>Intimidation</label>
-                <select id=intimidation name=skills.intimidation.prof>
+                <select id=intimidation class="onBlack inpCent" name=skills.intimidation.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=investigation>Investigation</label>
-                <select id=investigation name=skills.investigation.prof>
+                <select id=investigation class="onBlack inpCent" name=skills.investigation.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=medicine>Medicine</label>
-                <select id=medicine name=skills.medicine.prof>
+                <select id=medicine class="onBlack inpCent" name=skills.medicine.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=nature>Nature</label>
-                <select id=nature name=skills.nature.prof>
+                <select id=nature class="onBlack inpCent" name=skills.nature.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=perception>Perception</label>
-                <select id=perception name=skills.perception.prof>
+                <select id=perception class="onBlack inpCent" name=skills.perception.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=performance>Performance</label>
-                <select id=performance name=skills.performance.prof>
+                <select id=performance class="onBlack inpCent" name=skills.performance.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=persuasion>Persuasion</label>
-                <select id=persuasion name=skills.persuasion.prof>
+                <select id=persuasion class="onBlack inpCent" name=skills.persuasion.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=religion>Religion</label>
-                <select id=religion name=skills.religion.prof>
+                <select id=religion class="onBlack inpCent" name=skills.religion.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=slightOfHand>Slight Of Hand</label>
-                <select id=slightOfHand name=skills.slightOfHand.prof>
+                <select id=slightOfHand class="onBlack inpCent" name=skills.slightOfHand.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=stealth>Stealth</label>
-                <select id=stealth name=skills.stealth.prof>
+                <select id=stealth class="onBlack inpCent" name=skills.stealth.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
                 </select><br>
 
                 <label for=survival>Survival</label>
-                <select id=survival name=skills.survival.prof>
+                <select id=survival class="onBlack inpCent" name=skills.survival.prof>
                     <option value="Not Proficient">Not Proficient</option>
                     <option value="Proficient">Proficient</option>
                     <option value="Expertise">Expertise</option>
@@ -221,8 +221,11 @@
     <br>
     <br>
 </form>
-    <form action="/characters/<%= char._id%>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete Character">
-    </form>
+    <div id=showCharDel>
+        <form  action="/characters/<%= char._id%>?_method=DELETE" method="POST">
+            <input  type="submit" value="Delete Character">
+        </form>
+    
+    </div>
 </body>
 </html>

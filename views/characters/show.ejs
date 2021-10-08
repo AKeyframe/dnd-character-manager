@@ -4,27 +4,30 @@
     <%- include('../partials/head.ejs'); %>
 <body>
     <%- include('../partials/nav.ejs'); %>
-    <div>
+    <div class=headDiv>
         <div>
-            <h2 style="text-align:center"><%= char.name %></h2>
-            
+            <h1 id=showCharHead class=pageHead><%= char.name %></h1>
+        </div>
+        
+        <div id=showCharEdit>
+            <a class="ltab" href="/characters/<%=char._id%>/edit">Edit</a>
         </div>
     </div>
 
     <div class="charInfo">
-        <div class="info">
+        <div class="info backgroundDiv">
             <h4>Race: <%= char.race %></h4>
             <h4>Class: <%= char.class %></h4>
             
         </div>
 
-        <div class="info">
+        <div class="info backgroundDiv">
             <h4><%=char.prof%></h4>
             <h4>Proficiency</h4>
             <h4>Bonus</h4>
         </div>
 
-        <div class="health">
+        <div class="health backgroundDiv">
             <div class="hpValue">
                 <h4>HP</h4>
                 <h4><%= char.hp.cur %> / <%= char.hp.max %></h4>
@@ -32,14 +35,14 @@
             <div class="hpMod">
                 <form class="inputHp">
                     <input type="submit" name="hpMod" value="Heal">
-                    <input type="number" min=0 max="<%=char.hp.max %>" placeholder="<%= char.hp.cur%>">
+                    <input class="onBlack" type="number" min=0 max="<%=char.hp.max %>" placeholder="<%= char.hp.cur%>">
                     <input type="submit" name="hpMod" value="Damage">
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="center">
+    <div class="center backgroundDiv">
         <div class="stats">
             <div class="indStat">
                 <h4>+<%=char.stats.str.mod%></h4>
@@ -78,7 +81,7 @@
             </div>
         </div>
     </div>
-    <div id="showCombatStats" class="combatStats">
+    <div id="showCombatStats" class="combatStats backgroundDiv">
         <div>
             <h4>+<%= char.initiative %></h4>
             <h4>Initiative</h4>
@@ -95,10 +98,11 @@
             <h4>Class</h4>
         </div>
     </div>
-    <div>
-        <div class="skills">
+    <div id="sndInfo">
+        <div class="skills backgroundDiv">
+            <h4 style="text-align: center; font-size: 20px;">Skills</h4>
             <h4>Acrobatics: <%= char.skills.acrobatics.prof %> </h4>
-            <h4>AnimalHandling: <%= char.skills.animalHandling.prof %></h4>
+            <h4>Animal Handling: <%= char.skills.animalHandling.prof %></h4>
             <h4>Arcana: <%= char.skills.arcana.prof %></h4>
             <h4>Athletics: <%= char.skills.athletics.prof %></h4>
             <h4>Deception: <%= char.skills.deception.prof %></h4>
@@ -112,17 +116,25 @@
             <h4>Performance: <%= char.skills.performance.prof %></h4>
             <h4>Persuasion: <%= char.skills.persuasion.prof %></h4>
             <h4>Religion: <%= char.skills.religion.prof %></h4>
-            <h4>SlightOfHand: <%= char.skills.slightOfHand.prof %></h4>
+            <h4>Slight Of Hand: <%= char.skills.slightOfHand.prof %></h4>
             <h4>Stealth: <%= char.skills.stealth.prof %></h4>
             <h4>Survival: <%= char.skills.survival.prof %></h4>
         </div>
+        <div>
+
+        </div>
+
     </div>
     <br>
     <br>
+    
+    <div id=showCharDel>
+        <form  action="/characters/<%= char._id%>?_method=DELETE" method="POST">
+            <input  type="submit" value="Delete Character">
+        </form>
+        
+    </div>
     <br>
-    <a href="/characters/<%=char._id%>/edit">Edit</a>
-    <form action="/characters/<%= char._id%>?_method=DELETE" method="POST">
-        <input type="submit" value="Delete Character">
-    </form>
+   
 </body>
 </html>

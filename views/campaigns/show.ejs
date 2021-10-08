@@ -3,28 +3,64 @@
     <%- include('../partials/head.ejs'); %>
 <body>
     <%- include('../partials/nav.ejs'); %>
-    <h1><%= camp.name %></h1>
+    <div class=headDiv>
+        <div>
+            <h1 id=showCharHead class=pageHead><%= camp.name %></h1>
+        </div>
+            
+        <div id=showCharEdit>
+            <a class="ltab" href="#">Edit</a>
+        </div>
+    </div>
+
+
+
+
+
+        
 
     <% if(camp.dm.equals(user._id)) { %> 
+    <div class=headDiv style="justify-content: center;">
         <form action="/campaigns/sendRequest" method="POST">
             <input type="text" name="username" placeholder="Username">
             <input type="hidden" name="id" value="<%= camp._id %>">
             <input type="submit" value="Invite Player">
         </form>
+    </div>
     <% } %>
     
    
+    <div class=headDiv style="justify-content: center;">
+        <form action="/characters/joinCampaign" method="POST">
+            <select name="charId">
+            <% user.characters.forEach( (char, i) => { %> 
+                <option value="<%= char._id %>"><%= char.name %></option>
 
-    <form action="/characters/joinCampaign" method="POST">
-        <select name="charId">
-        <% user.characters.forEach( (char, i) => { %> 
-            <option value="<%= char._id %>"><%= char.name %></option>
-
-        <% }); %>
-        </select>
-        <input type="hidden" name="campId" value="<%= camp._id %>">
-        <input type="submit" value="Add to Campaign">
-    </form>
+            <% }); %>
+            </select>
+            <input type="hidden" name="campId" value="<%= camp._id %>">
+            <input type="submit" value="Add to Campaign">
+        </form>
+    </div>
         
+    <br><br><br>
+
+    <% if(camp.dm.equals(user._id) ) { %>
+        <div id=showCharDel>
+            <form action="/campaigns/<%= camp._id%>?_method=DELETE" method="POST">
+                <input type="submit" value="Delete Campaign">
+            </form>
+        </div>
+
+    <% } else { %>
+        <div id=showCharDel>
+            <form action="/user/leaveCampaign" method="POST">
+                <input type="hidden" name="campId" value="<%= camp._id %>">
+                <input type="hidden" name="userId" value="<%= user._id %>">
+
+                <input type="submit" value="Leave Campaign">
+            </form>
+        </div>
+    <% } %>
 </body>
 </html>

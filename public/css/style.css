@@ -3,23 +3,8 @@
     /* border: solid black 1px; */
 }
 /* #region temp */
-#defaultChar, #defaultCamp {
-    border: solid black 1px;
-    margin: 2px;
-    padding: 2px;
-}
+
 /* #endregion temp */
-
-
-body {
-    background-color: #111625;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)), url(/images/background/1578713.jpg);
-    background-size: 120vh 100vw;
-    background-repeat: no-repeat;
-    background-position: top;
-    margin:0;
-}
-
 nav {
     display: flex;
     justify-content: space-between;
@@ -30,6 +15,30 @@ nav {
     padding: 10px;
 }
 
+#smallAva {
+    height: 25px;
+    width: 25px;
+    border: solid rgb(66, 74, 99) 1px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-top: 1px;    
+}
+
+body {
+    background-color: #111625;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.20), rgba(0, 0, 0, 0.20)), url(/images/background/1578713.jpg);
+    background-size: 120vh 100vw;
+    background-repeat: no-repeat;
+    background-position: top;
+    margin:0;
+}
+
+.pageHead {
+    color: rgba(35,37,52,255);
+    margin: 18px 0px;
+    text-shadow: -1px -1px 4px rgba(192, 192, 192, 0.15), 1px -1px 4px rgba(192, 192, 192, 0.15), -1px 1px 4px rgba(192, 192, 192, 0.15), 1px 1px 4px rgba(192, 192, 192, 0.15);
+}
+
 a {
     color: silver;
     text-decoration: none;
@@ -37,7 +46,7 @@ a {
 }
 
 .ltab {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(49, 18, 18, 0.45);
     border: solid rgba(192, 192, 192, 0.80) 1px;
     border-radius: 7px;
     box-shadow: rgba(0, 0, 0, 0.25) 2px 2px 3px;
@@ -55,9 +64,14 @@ a {
     text-shadow: 1px 1px 2px rgba(192, 192, 192, 0.6);
 }
 
+.htal:hover {
+    text-shadow: 2px 2px 4px rgba(192, 192, 192, 0.6);
+
+}
+
 .center h1, #regPageHead {
     color: rgba(35,37,52,255);
-    margin-top: 29vh;
+    margin-top: 25vh;
     margin-bottom: 7px;
     text-shadow: -1px -1px 4px rgba(192, 192, 192, 0.15), 1px -1px 4px rgba(192, 192, 192, 0.15), -1px 1px 4px rgba(192, 192, 192, 0.15), 1px 1px 4px rgba(192, 192, 192, 0.15);
     
@@ -91,9 +105,40 @@ input[type="submit"]:hover{
     padding: 4px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+select {
+    background-color: rgba(0, 0, 0, 0.25);
+    color:silver;
+    border-style:hidden;
+    border-radius: 7px;
+    
+    box-shadow: rgba(0, 0, 0, 0.25) 2px 2px 3px;
+    margin: 5px;
+    padding: 3px; 
+}
+
+option {
+    background-color:rgb(66, 74, 99);
+    outline: none;
+}
+
+fieldset {
+    border: none;
+}
+legend {
+    text-align: center;
+    font-size: 20px;
+}
+
 nav form {
     overflow: hidden;
 }
+
 .navDropButton {
     border: none;
     background:transparent;
@@ -106,12 +151,30 @@ nav form {
     height:100%;
 }
 
+.avaDrop {
+    display:flex;
+}
+
+.headDiv {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 5px;
+}
+
 .backgroundDiv {
     background-color: rgba(17, 22, 37, 0.65);
     color: silver;
+    border: solid rgb(66, 74, 99) 1px;
     border-radius: 7px;
-    box-shadow: rgba(0, 0, 0, 0.40) 3px 3px 4px;
+    box-shadow: rgba(0, 0, 0, 0.60) 3px 3px 6px;
     margin: 10px;
+    padding: 5px;
+}
+
+.onBlack {
+    background-color:rgba(108, 120, 153, 0.534);
+    box-shadow: rgba(51, 51, 51, 0.6) 3px 3px 6px;
 }
 
 /*----------------------------------------------------------*/
@@ -164,7 +227,7 @@ input::placeholder {
     display:none;
 }
 
-#signUpDiv input::placeholder {
+#signUpDiv input, #signUpDiv input::placeholder {
     text-align: center;
 }
 
@@ -196,7 +259,7 @@ input::placeholder {
     display: none;
     position: absolute;
     right: 0;
-    background-color: rgba(17, 22, 37, 0.90);
+    background-color: rgba(17, 22, 37, 1);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -229,6 +292,9 @@ input::placeholder {
 
 /* ------------------------------------------------------*/
 /* #region Character Index / Shorthand */
+#creButDiv {
+    margin:auto;
+}
 
 .characterDiv {
     padding: 5px 20px;
@@ -305,6 +371,30 @@ input::placeholder {
     margin: 20px 10px 10px 10px;
 }
 
+#showCharHead {
+    margin-left: 192px;
+}
+
+#showCharDel, #showCharEdit, #showCharDel input {
+    margin: auto 0px;
+    font-size: 20px;
+}
+
+#showCharEdit {
+    margin-right: 35px;
+}
+
+#showCharDel {
+    display: flex;
+    justify-content: center;
+}
+
+.info {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .charInfo{
     display: flex;
     justify-content: center;
@@ -320,6 +410,7 @@ input::placeholder {
 .hpValue, .hpMod {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .inputHp {
@@ -338,7 +429,61 @@ input::placeholder {
     text-align: center;
 }
 
+.stats {
+    display: flex;
+    justify-content: center;
+}
+
+#sndInfo {
+    display: flex;
+    max-width: 48vw;
+}
+
+.skills h4 {
+    font-size: 14px;
+    margin: 5px;
+    padding: 5px;
+}
+
+
+
 
 /* #endregion Character Show */
 
+/* ------------------------------------------------------*/
+/* #region Character Edit */
+.inpCent {
+    text-align: center;
+}
+/* #endregion Character Edit */
 
+/* ------------------------------------------------------*/
+/* #region Campaign Index */
+.campDiv {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 10px;
+
+}
+
+.campDiv h4, .campDiv h2 {
+    text-align: center;
+    margin: 5px;
+}
+
+/* #endregion Campaign Index */
+
+
+/* #region Request */
+.req {
+    display: flex;
+    justify-content: space-between;
+}
+
+.accDec {
+    margin: 5px auto;
+}
+
+
+/* #endrgion Request */

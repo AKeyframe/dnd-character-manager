@@ -3,50 +3,67 @@
     <%- include('../partials/head.ejs'); %>
 <body>
     <%- include('../partials/nav.ejs'); %>
-    <h1>Your Campaigns</h1>
+    
+    <div class="headDiv">
+        <h1 class=pageHead>Your Campaigns</h1>
+        <div id="creButDiv">
+            <a class="ltab" href="/campaigns/new">Create A Campaign</a>
+        </div>
+    </div>
 
-    <a href="/campaigns/new">Create A Campaign</a>
 
+    
     <% if(camps.length != 0) { %>
         <% camps.forEach( (c, i) => { %>
-            <% if(c.dm == user._id ) { %>
-                <a href='/campaigns/<%= c._id %>'><h3><%= c.name %></h3></a>
-
+            <div class='campDiv backgroundDiv'>
                 
-
-                <form action="/campaigns/<%= c._id%>?_method=DELETE" method="POST">
-                    <input type="submit" value="Delete Campaign">
-                </form>
-
-            <% } else { %>
-                <a href='/campaigns/<%= c._id %>'><h3><%= c.name %></h3></a>
-
-                <div>
-                    <div><h4>Players:</h4></div>
+                <% if(c.dm == user._id ) { %>
+                    
                     <div>
-                        <% if(c.players.length !== 0) { %>
-                            <% c.players.forEach( p => { %>
-                                <h4><%=p.playerId.username %></h4>
-
-                            <% }); %>
-                        <% } else { %>
-                            <h4>No Players Currently</h4>
-                        <% } %>
-
+                        <a class=htal href='/campaigns/<%= c._id %>'><h3><%= c.name %></h3></a>
                     </div>
-                </div>
+                        <div>
+                            <div><h2>Players</h2></div>
+                            <div>
+                                <% if(c.players.length !== 0) { %>
+                                    <% c.players.forEach( p => { %>
+                                        <h4><%=p.playerId.username %></h4>
+
+                                    <% }); %>
+                                <% } else { %>
+                                    <h4>No Players Currently</h4>
+                                <% } %>
+
+                            </div>
+                        </div>
+
+                <% } else { %>
+                    <div>
+                        <a class=htal href='/campaigns/<%= c._id %>'><h3><%= c.name %></h3></a>
+                    </div>
+                        <div>
+                            <div><h2>Players</h2></div>
+                            <div>
+                                <% if(c.players.length !== 0) { %>
+                                    <% c.players.forEach( p => { %>
+                                        <h4><%=p.playerId.username %></h4>
+
+                                    <% }); %>
+                                <% } else { %>
+                                    <h4>No Players Currently</h4>
+                                <% } %>
+
+                            </div>
+                        </div>
 
 
-                <form action="/user/leaveCampaign" method="POST">
-                    <input type="hidden" name="campId" value="<%= c._id %>">
-                    <input type="hidden" name="userId" value="<%= user._id %>">
-
-                    <input type="submit" value="Leave Campaign">
-                </form>
-            
-            <% } %> <!-- p.playerId-->
+                        
+                
+                <% } %> <!-- p.playerId-->
+            </div>
         <% }); %> <!-- forEach()-->
     <% } %> <!-- If camps !=0 -->
+
     
 </body>
 </html>

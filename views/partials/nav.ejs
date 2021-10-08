@@ -3,17 +3,26 @@
         <a href="/">Home</a>
     </div>
     
-    <div id="profDrop" class="dropdown" style="float:right;"> 
-        <a id="dropLink" href="/user/<%=user.username%>"><%= user.username %></a>
-        <div class="dropdown-content">
-            <a href='/user/<%= user.username %>'>Profile</a>
-            <a href="/characters">Characters</a>
-            <a href="/campaigns">Campaigns</a>
-            <a href="/user/<%= user.username %>/requests">Requests</a>
+    
+    <div class="avaDrop">
+        <% if(user.avatar) { %>
+            <div>
+                <img id=smallAva src=https://i.imgur.com/g071hrL.png>
+            </div> 
+        <% } %>
 
-            <form action="/sessions?_method=DELETE" method="POST"> 
-                <input style="border:none; border-radius: 0px; margin: 0; padding: 12px 16px; font-family: 'Times New Roman', Times, serif;"  class="navDropButton" type="submit" value="Sign Out">
-            </form>
+        <div id="profDrop" class="dropdown" style="float:right;">
+            <a id="dropLink" href="/user/<%=user.username%>"><%= user.username %></a>
+            <div class="dropdown-content">
+                <a href='/user/<%= user.username %>'>Profile</a>
+                <a href="/characters">Characters</a>
+                <a href="/campaigns">Campaigns</a>
+                <a href="/user/<%= user.username %>/requests">Requests</a>
+
+                <form action="/sessions?_method=DELETE" method="POST"> 
+                    <input style="border:none; border-radius: 0px; margin: 0; padding: 12px 16px; font-family: 'Times New Roman', Times, serif;"  class="navDropButton" type="submit" value="Sign Out">
+                </form>
+            </div>
         </div>
     </div>
 </nav>

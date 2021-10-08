@@ -3,30 +3,34 @@
     <%- include('../partials/head.ejs'); %>
 <body>
     <%- include('../partials/nav.ejs'); %>
-    <h1>Requests</h1>
+    <div class=headDiv>
+        <h1 class=pageHead>Requests</h1>
+    </div>
 
 
     <% user.requests.forEach( reQ => { %>
-        <% if(reQ.invType == 'campaign') { %> 
-            <h4><%= reQ.by.username %> has invited you to join their campaign <%=reQ.for.name %></h4>
-            <div>
-                <form action="/user/acceptRequest" method="POST">
-                    <input type="hidden" name="invType" value="<%=reQ.invType%>">
-                    <input type="hidden" name="campId" value="<%=reQ.for._id%>">
-                    <input type="hidden" name="userId" value="<%=user._id%>">
-                    <input type="hidden" name="reqId" value="<%=reQ._id%>">
-                    <input type="submit" value="Accept">
-                </form>
-                <form action="/user/declineRequest" method="POST">
-                    <input type="hidden" name="userId" value="<%=user._id%>">
-                    <input type="hidden" name="reqId" value="<%=reQ._id%>">
-                    <input type="submit" value="Decline">
-                </form>
-            </div>
-        <% } else { %>
-        
-        
-        <% } %>
+        <div class="req backgroundDiv">
+            <% if(reQ.invType == 'campaign') { %> 
+                <h4><%= reQ.by.username %> has invited you to join their campaign <br> <%=reQ.for.name %></h4>
+                <div class="accDec">
+                    <form action="/user/acceptRequest" method="POST">
+                        <input type="hidden" name="invType" value="<%=reQ.invType%>">
+                        <input type="hidden" name="campId" value="<%=reQ.for._id%>">
+                        <input type="hidden" name="userId" value="<%=user._id%>">
+                        <input type="hidden" name="reqId" value="<%=reQ._id%>">
+                        <input type="submit" value="Accept">
+                    </form>
+                    <form action="/user/declineRequest" method="POST">
+                        <input type="hidden" name="userId" value="<%=user._id%>">
+                        <input type="hidden" name="reqId" value="<%=reQ._id%>">
+                        <input type="submit" value="Decline">
+                    </form>
+                </div>
+            <% } else { %>
+            
+            
+            <% } %>
+        </div>
     <% }) %>
 </body>
 </html>
